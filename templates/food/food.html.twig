@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les aliments{% endblock %}
+
+
+{% block pageTitle %}
+    Les aliments
+    {% if isCalorie %}
+        de moins de 50 calories
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center">
+            {# link to display food which calorie < 50 #}
+            <div class="col-12 d-flex justify-content-center my-4">
+                <a href="{{ path('app_foodPerCalorie', {'calorie': 50}) }}" class="text-decoration-none">Aliments de moins de 50 calories au 100g</a>
+                <span class="badge badge-warning mx-3 p-2"><a href="{{ path('app_food') }}" class="text-white text-decoration-none">Retour à la page Aliments</a></span>
+            </div>
+            <div class="col-12 d-flex justify-content-center flex-wrap">
+                {% for oneFood in food %}
+                <div class="card text-white bg-danger m-2" style="max-width: 18rem;">
+                    <img src="{{ asset('images/' ~ oneFood.image) }}" class="rounded-top" alt="photo de l\'aliment">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">{{ oneFood.name|capitalize }}</h2>
+                        <p></p>
+                    </div>
+                    <ul class="list-group list-group-flush text-dark">
+                        <li class="list-group-item text-center"><h3>Prix au kilo: {{ oneFood.price }} €</h3></li>
+                        <li class="list-group-item">Calories: {{ oneFood.calorie }}</li>
+                        <li class="list-group-item">Protéines: {{ oneFood.protein }}</li>
+                        <li class="list-group-item">Glucides: {{ oneFood.carbohydrate }}</li>
+                        <li class="list-group-item">Lipides: {{ oneFood.lipid }}</li>
+                    </ul>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
