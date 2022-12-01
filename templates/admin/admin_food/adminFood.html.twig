@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+
+{% block pageTitle %}
+    Page d'administration des aliments
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                {# Add button #}
+                <div class="text-center my-4">
+                    <a href="" class="btn btn-info">Ajouter</a>
+                </div>
+
+                {# Table #}
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center flex-wrap">
+                        <table class="table table-hover border">
+                            <thead>
+                                <tr class="table-danger">
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Aliment</th>
+                                    <th scope="col">Prix</th>
+                                    <th scope="col">Calories</th>
+                                    <th scope="col">Protéines</th>
+                                    <th scope="col">Glucides</th>
+                                    <th scope="col">Lipides</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            {% for oneFood in food %}
+                            <tbody>
+                                <tr class="table">
+                                    <td><img src="{{ asset('images/' ~ oneFood.image) }}" alt="{{ oneFood.name }}" style="width: 100px;"></td>
+                                    <td>{{ oneFood.name|capitalize }}</td>
+                                    <td>{{ oneFood.price }}0 €</td>
+                                    <td>{{ oneFood.calorie }}</td>
+                                    <td>{{ oneFood.protein }}</td>
+                                    <td>{{ oneFood.carbohydrate }}</td>
+                                    <td>{{ oneFood.lipid }}</td>
+                                    <td>
+                                        <form action="">
+                                            <div class="form-group row">
+                                                <button type="button" class="btn btn-warning">Modifier</button>
+                                                <button type="button" class="btn btn-danger">Supprimer</button>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
