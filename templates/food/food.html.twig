@@ -7,24 +7,37 @@
     Les aliments
     {% if isCalorie %}
         de moins de 50 calories
+    {% elseif isCarbohydrate %}
+        de moins de 5 glucides
+    {% elseif isLipid %}
+        de valeur égale ou inférieure à 0.26 lipides
     {% endif %}
 {% endblock %}
 
 {% block body %}
     <div class="container-fluid">
         <div class="row d-flex justify-content-center">
-            {# link to display food which calorie < 50 #}
-            <div class="col-12 d-flex justify-content-center my-4">
-                <a href="{{ path('app_foodPerCalorie', {'calorie': 50}) }}" class="text-decoration-none">Aliments de moins de 50 calories au 100g</a>
+            {# Links to display food per property #}
+            <div class="col-12 d-flex justify-content-center my-2">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center flex-wrap">
+                        <a href="{{ path('app_foodPerCalorie', {'calorie': 50}) }}" class="text-decoration-none text-danger mr-3">Aliments de moins de 50 calories au 100g</a>
+                        <a href="{{ path('app_foodPerCarbohydrate', {'carbohydrate': 5}) }}" class="text-decoration-none text-danger mr-3">Aliments de moins de 5 glucides au 100g</a>
+                        <a href="{{ path('app_foodPerLipid', {'lipid': 0.26}) }}" class="text-decoration-none text-danger mr-3">Aliments de valeur égale ou inférieure à 0.26 lipides au 100g</a>
+                    </div>
+                </div>
+            </div>
+            {# Back to the food page #}
+            <div class="col-12 d-flex justify-content-center my-2">
                 <span class="badge badge-warning mx-3 p-2"><a href="{{ path('app_food') }}" class="text-white text-decoration-none">Retour à la page Aliments</a></span>
             </div>
+            {# Food card #}
             <div class="col-12 d-flex justify-content-center flex-wrap">
                 {% for oneFood in food %}
                 <div class="card text-white bg-danger m-2" style="max-width: 18rem;">
                     <img src="{{ asset('images/' ~ oneFood.image) }}" class="rounded-top" alt="photo de l\'aliment">
                     <div class="card-body">
                         <h2 class="card-title text-center">{{ oneFood.name|capitalize }}</h2>
-                        <p></p>
                     </div>
                     <ul class="list-group list-group-flush text-dark">
                         <li class="list-group-item text-center"><h3>Prix au kilo: {{ oneFood.price }} €</h3></li>

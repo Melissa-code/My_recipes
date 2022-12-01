@@ -39,12 +39,31 @@ class FoodRepository extends ServiceEntityRepository
         }
     }
 
-    public function getFoodPerCalorie($calorie)
+//    /**
+//     * @param string $calorie
+//     * @return array
+//     */
+//    public function getFoodPerCalorie(string $calorie): array
+//    {
+//       return $this->createQueryBuilder('f')
+//            ->andWhere('f.calorie < :val')
+//            ->setParameter('val', $calorie)
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult();
+//    }
+
+    /**
+     * @param string $property
+     * @param string $sign
+     * @param float|null $value
+     * @return array
+     */
+    public function getFoodPerProperty(string $property, string $sign, ?float $value): array
     {
-       return $this->createQueryBuilder('f')
-            ->andWhere('f.calorie < :val')
-            ->setParameter('val', $calorie)
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.'.$property.' '.$sign.' :val')
+            ->setParameter('val', $value)
             ->getQuery()
             ->getResult();
     }
