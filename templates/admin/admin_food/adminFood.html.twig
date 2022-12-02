@@ -46,12 +46,8 @@
                                     <td>{{ oneFood.carbohydrate }}</td>
                                     <td>{{ oneFood.lipid }}</td>
                                     <td>
-                                        <form action="">
-                                            <div class="form-group row">
-                                                <button type="button" class="btn btn-warning">Modifier</button>
-                                                <button type="button" class="btn btn-danger">Supprimer</button>
-                                            </div>
-                                        </form>
+                                        <a class="btn btn-warning" href="{{ path('app_update_ingredient', {'id': oneFood.id}) }}">Modifier</a>
+                                        <a class="btn btn-danger">Supprimer</a>
                                     </td>
                                 </tr>
                             {% endfor %}
