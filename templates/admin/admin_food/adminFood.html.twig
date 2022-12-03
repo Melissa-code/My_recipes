@@ -11,7 +11,9 @@
 {% block body %}
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="row d-flex justify-content-center">
+
+
             <div class="col-12">
 
                 {# Add button #}
@@ -25,29 +27,36 @@
                         <table class="table table-hover border">
                             <thead>
                                 <tr class="table-danger">
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Aliment</th>
-                                    <th scope="col">Prix</th>
-                                    <th scope="col">Calories</th>
-                                    <th scope="col">Protéines</th>
-                                    <th scope="col">Glucides</th>
-                                    <th scope="col">Lipides</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col" class="text-center">Image</th>
+                                    <th scope="col" class="text-center">Aliment</th>
+                                    <th scope="col" class="text-center">Prix</th>
+                                    <th scope="col" class="text-center">Calories</th>
+                                    <th scope="col" class="text-center">Protéines</th>
+                                    <th scope="col" class="text-center">Glucides</th>
+                                    <th scope="col" class="text-center">Lipides</th>
+                                    <th scope="col" class="text-center">Action</th>
                                 </tr>
                             </thead>
                             {% for oneFood in food %}
                             <tbody>
                                 <tr class="table">
-                                    <td><img src="{{ asset('images/' ~ oneFood.image) }}" alt="{{ oneFood.name }}" style="width: 100px;"></td>
-                                    <td>{{ oneFood.name|capitalize }}</td>
-                                    <td>{{ oneFood.price }}0 €</td>
-                                    <td>{{ oneFood.calorie }}</td>
-                                    <td>{{ oneFood.protein }}</td>
-                                    <td>{{ oneFood.carbohydrate }}</td>
-                                    <td>{{ oneFood.lipid }}</td>
-                                    <td>
-                                        <a class="btn btn-warning" href="{{ path('app_update_ingredient', {'id': oneFood.id}) }}">Modifier</a>
-                                        <a class="btn btn-danger">Supprimer</a>
+                                    <td class="text-center"><img src="{{ asset('images/' ~ oneFood.image) }}" alt="{{ oneFood.name }}" style="width: 100px;"></td>
+                                    <td class="text-center">{{ oneFood.name|capitalize }}</td>
+                                    <td class="text-center">{{ oneFood.price }}0 €</td>
+                                    <td class="text-center">{{ oneFood.calorie }}</td>
+                                    <td class="text-center">{{ oneFood.protein }}</td>
+                                    <td class="text-center">{{ oneFood.carbohydrate }}</td>
+                                    <td class="text-center">{{ oneFood.lipid }}</td>
+                                    <td class="d-flex justify-content-center">
+                                        {# Update food #}
+                                        <a class="btn btn-warning mr-2" href="{{ path('app_update_ingredient', {'id': oneFood.id}) }}">Modifier</a>
+
+                                        {# Delete food #}
+                                        <form method="POST" action="{{ path('app_delete', {'id': oneFood.id}) }}" onsubmit="return confirm('Confirmer la suppression de l\'aliment')" >
+                                            <input type="hidden" name="_method" value="DEL">
+                                            <input type="hidden" name="_token" value="{{ csrf_token("REM" ~ oneFood.id) }}">
+                                            <input type="submit" class="btn btn-danger" value="Supprimer">
+                                        </form>
                                     </td>
                                 </tr>
                             {% endfor %}
