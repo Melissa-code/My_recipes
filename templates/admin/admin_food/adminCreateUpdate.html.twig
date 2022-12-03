@@ -4,7 +4,11 @@
 
 
 {% block pageTitle %}
+    {% if isUpdating %}
     Modification de l'aliment {{ food.name }}
+    {% else %}
+        Ajout d'un aliment
+    {% endif %}
 {% endblock %}
 
 
@@ -29,7 +33,7 @@
 
                 {{ form_widget(form) }}
 
-                <input type="submit" class="btn btn-warning" value="Modifier">
+                <input type="submit" class="btn btn-warning" value="Enregistrer">
 
             {{ form_end(form) }}
         </div>

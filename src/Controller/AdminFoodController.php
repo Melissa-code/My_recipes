@@ -32,9 +32,14 @@ class AdminFoodController extends AbstractController
      * @param Food $food
      * @return Response
      */
+    #[Route('/admin/food/create', name: 'app_create_ingredient')]
     #[Route('/admin/food/{id}', name: 'app_update_ingredient')]
-    public function updateIngredient(Food $food, Request $request, ManagerRegistry $managerRegistry)
+    public function createOrUpdateIngredient(Food $food = null, Request $request, ManagerRegistry $managerRegistry)
     {
+        if(!$food) {
+            $food = new Food();
+        }
+
         $form = $this->createForm(FoodType::class, $food);
         $form->handleRequest($request);
 
@@ -44,9 +49,10 @@ class AdminFoodController extends AbstractController
             return $this->redirectToRoute('app_admin_food');
         }
 
-        return $this->render('admin/admin_food/adminUpdate.html.twig', [
+        return $this->render('admin/admin_food/adminCreateUpdate.html.twig', [
             'food' => $food,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'isUpdating' => $food->getId() !== null
         ]);
 
 
