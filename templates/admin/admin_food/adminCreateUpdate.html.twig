@@ -20,20 +20,17 @@
         {# form #}
         <div class="col-10 col-md-8 col-lg-6 border p-4 rounded">
             {{ form_start(form) }}
+            <div>{{ form_errors(form) }}</div>
+            <img class="rounded" src="{{ asset('images/food/' ~ food.image) }}" alt="{{ food.name }}" style="width: 100px;">
+            <div>{{ form_row(form.imageFile, {'label': 'Image :', 'attr': {'class':'text-secondary'}}) }}</div>
+            <div>{{ form_row(form.name, {'label': 'Nom :', 'attr': {'class':'text-secondary'}}) }}</div>
+            <div>{{ form_row(form.price, {'label': 'Prix :', 'attr': {'class':'text-secondary'}}) }}</div>
+            <div>{{ form_row(form.calorie, {'label': 'Calories :', 'attr': {'class':'text-secondary'}}) }}</div>
+            <div>{{ form_row(form.protein, {'label': 'Protéines :', 'attr': {'class':'text-secondary'}}) }}</div>
+            <div>{{ form_row(form.carbohydrate, {'label': 'Glucides :', 'attr': {'class':'text-secondary'}}) }}</div>
+            <div>{{ form_row(form.lipid, {'label': 'Lipides :', 'attr': {'class':'text-secondary'}}) }}</div>
 
-                <img class="rounded" src="{{ asset('images/' ~ food.image) }}" alt="{{ food.name }}" style="width: 100px;">
-                <div>{{ form_row(form.imageFile, {'label': 'Image :', 'attr': {'class':'text-secondary'}}) }}</div>
-
-                <div>{{ form_row(form.name, {'label': 'Nom :', 'attr': {'class':'text-secondary'}}) }}</div>
-                <div>{{ form_row(form.price, {'label': 'Prix :', 'attr': {'class':'text-secondary'}}) }}</div>
-                <div>{{ form_row(form.calorie, {'label': 'Calories :', 'attr': {'class':'text-secondary'}}) }}</div>
-                <div>{{ form_row(form.protein, {'label': 'Protéines :', 'attr': {'class':'text-secondary'}}) }}</div>
-                <div>{{ form_row(form.carbohydrate, {'label': 'Glucides :', 'attr': {'class':'text-secondary'}}) }}</div>
-                <div>{{ form_row(form.lipid, {'label': 'Lipides :', 'attr': {'class':'text-secondary'}}) }}</div>
-
-{#                {{ form_widget(form) }}#}
-
-                <input type="submit" class="btn btn-warning" value="Enregistrer">
+            <input type="submit" class="btn btn-warning" value="Enregistrer">
 
             {{ form_end(form) }}
         </div>

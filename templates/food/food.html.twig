@@ -35,7 +35,7 @@
             <div class="col-12 d-flex justify-content-center flex-wrap">
                 {% for oneFood in food %}
                 <div class="card text-white bg-danger m-2" style="max-width: 18rem;">
-                    <img src="{{ asset('images/' ~ oneFood.image) }}" class="rounded-top" alt="photo de l\'aliment">
+                    <img src="{{ asset('images/food/' ~ oneFood.image) }}" class="rounded-top" alt="photo de l\'aliment" >
                     <div class="card-body">
                         <h2 class="card-title text-center">{{ oneFood.name|capitalize }}</h2>
                     </div>

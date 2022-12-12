@@ -3,14 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\FoodRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use DateTime;
 
-#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: FoodRepository::class)]
+#[Vich\Uploadable]
 class Food
 {
     #[ORM\Id]
@@ -32,7 +34,7 @@ class Food
     #[ORM\Column(length: 100)]
     private ?string $image = null;
 
-//    #[Vich\UploadableField(mapping: 'food', fileNameProperty: 'imageName')]
+//    #[Vich\UploadableField(mapping: 'food_images', fileNameProperty: 'image')]
     private ?File $imageFile = null;
 
 
@@ -55,6 +57,9 @@ class Food
     #[Assert\Range(notInRangeMessage: 'Les lipides doivent être compris entre {{ min }} et {{ max }}', min: 0.1, max: 180,)]
     #[Assert\NotNull]
     private ?float $lipid = null;
+
+//    #[ORM\Column(nullable: true)]
+//    private DateTimeImmutable $updated_at;
 
 
     public function getId(): ?int
@@ -91,7 +96,7 @@ class Food
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(?string $image): self
     {
         $this->image = $image;
 
@@ -107,16 +112,12 @@ class Food
     public function setImageFile(?File $imageFile = null): self
     {
         $this->imageFile = $imageFile;
-        return $this;
 
-//        if (null !== $imageFile) {
-//            // It is required that at least one field changes if you are using doctrine
-//            // otherwise the event listeners won't be called and the file is lost
-//            $this->updatedAt = new \DateTimeImmutable();
+//        if($this->imageFile instanceof UploadedFile) {
+//            $this->updated_at = new DateTime('now');
 //        }
+        return $this;
     }
-
-
 
 
 
@@ -167,4 +168,16 @@ class Food
 
         return $this;
     }
+
+//    public function getUpdatedAt(): ?DateTimeImmutable
+//    {
+//        return $this->updated_at;
+//    }
+//
+//    public function setUpdatedAt(DateTimeImmutable $updated_at): self
+//    {
+//        $this->updated_at = $updated_at;
+//
+//        return $this;
+//    }
 }

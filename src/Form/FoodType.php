@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+
 
 class FoodType extends AbstractType
 {
@@ -16,6 +18,7 @@ class FoodType extends AbstractType
         $builder
             ->add('name')
             ->add('price')
+            //->add('imageFile', VichFileType::class)
             //->add('image')
             ->add('imageFile',
                 FileType::class, [
@@ -27,7 +30,7 @@ class FoodType extends AbstractType
                             'mimeTypes' => [
                                 'image/jpeg',
                                 'image/png',
-                                'image/jpeg'
+                                'image/jpg'
                             ],
                             'mimeTypesMessage' => 'Veuillez choisir un formar valide'
                         ])

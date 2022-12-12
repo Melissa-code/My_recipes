@@ -48,7 +48,7 @@
                             {% for oneFood in food %}
                             <tbody>
                                 <tr class="table">
-                                    <td class="text-center"><img src="{{ asset('images/' ~ oneFood.image) }}" alt="{{ oneFood.name }}" style="width: 100px;"></td>
+                                    <td class="text-center"><img src="{{ asset('images/food/' ~ oneFood.image) }}" alt="{{ oneFood.name }}" style="width: 100px;height: 80px"></td>
                                     <td class="text-center">{{ oneFood.name|capitalize }}</td>
                                     <td class="text-center">{{ oneFood.price }}0 €</td>
                                     <td class="text-center">{{ oneFood.calorie }}</td>

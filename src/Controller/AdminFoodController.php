@@ -57,7 +57,7 @@ class AdminFoodController extends AbstractController
             if($imageFile) {
                 $imageOriginal = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $imageReformat = $slugger->slug($imageOriginal);
-                $image = 'food/'.$imageReformat.'-'.uniqid().'-'.$imageFile->getExtension();
+                $image = $imageReformat.'-'.uniqid().'-'.$imageFile->getExtension();
 
                 $imageFile->move(
                     $this->getParameter('repertoire_images_food'),
@@ -94,10 +94,14 @@ class AdminFoodController extends AbstractController
     public function deleteIngredient(Food $food, Request $request, ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
+        $image = $this->getParameter('repertoire_images_food').'/'.$food->getImage();
 
         if($this->isCsrfTokenValid("REM".$food->getId(), $request->get("_token"))) {
             $entityManager->remove($food);
             $entityManager->flush();
+            if(file_exists($image)){
+                unlink($image);
+            }
             $this->addFlash('success', 'La suppression de l\'aliment '.$food->getName().' a bien été effectuée.');
             return $this->redirectToRoute('app_admin_food');
         }
