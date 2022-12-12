@@ -1,0 +1,16 @@
+vich_uploader:
+    db_driver: orm
+
+    metadata:
+        type: attribute
+
+    mappings:
+        food:
+            uri_prefix: /images/food
+            upload_destination: '%kernel.project_dir%/public/images/food'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+    #mappings:
+    #    products:
+    #        uri_prefix: /images/products
+    #        upload_destination: '%kernel.project_dir%/public/images/products'

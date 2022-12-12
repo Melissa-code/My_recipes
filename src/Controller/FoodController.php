@@ -74,8 +74,6 @@ class FoodController extends AbstractController
         ]);
     }
 
-
-
     /**
      * @param Food $food
      * @return Response with a food
@@ -87,4 +85,5 @@ class FoodController extends AbstractController
             'food' => $food,
         ]);
     }
+
 }

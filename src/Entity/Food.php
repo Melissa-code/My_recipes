@@ -5,7 +5,11 @@ namespace App\Entity;
 use App\Repository\FoodRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: FoodRepository::class)]
 class Food
 {
@@ -24,10 +28,13 @@ class Food
     #[Assert\NotNull]
     private ?float $price = null;
 
+
     #[ORM\Column(length: 100)]
-    #[Assert\Length(min:3, max:100, minMessage: 'L\image doit avoir au minimum 3 caractères', maxMessage: 'L\image doit avoir au maximum 100 caractères')]
-    #[Assert\NotBlank]
     private ?string $image = null;
+
+//    #[Vich\UploadableField(mapping: 'food', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
+
 
     #[ORM\Column]
     #[Assert\Range(notInRangeMessage: 'Les calories doivent être comprises entre {{ min }} et {{ max }}', min: 0.1, max: 180,)]
@@ -90,6 +97,28 @@ class Food
 
         return $this;
     }
+
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile = null): self
+    {
+        $this->imageFile = $imageFile;
+        return $this;
+
+//        if (null !== $imageFile) {
+//            // It is required that at least one field changes if you are using doctrine
+//            // otherwise the event listeners won't be called and the file is lost
+//            $this->updatedAt = new \DateTimeImmutable();
+//        }
+    }
+
+
+
+
 
     public function getCalorie(): ?int
     {

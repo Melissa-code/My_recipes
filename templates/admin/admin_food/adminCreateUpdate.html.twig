@@ -22,7 +22,7 @@
             {{ form_start(form) }}
 
                 <img class="rounded" src="{{ asset('images/' ~ food.image) }}" alt="{{ food.name }}" style="width: 100px;">
-                <div>{{ form_row(form.image, {'label': 'Image :', 'attr': {'class':'text-secondary'}}) }}</div>
+                <div>{{ form_row(form.imageFile, {'label': 'Image :', 'attr': {'class':'text-secondary'}}) }}</div>
 
                 <div>{{ form_row(form.name, {'label': 'Nom :', 'attr': {'class':'text-secondary'}}) }}</div>
                 <div>{{ form_row(form.price, {'label': 'Prix :', 'attr': {'class':'text-secondary'}}) }}</div>
@@ -31,7 +31,7 @@
                 <div>{{ form_row(form.carbohydrate, {'label': 'Glucides :', 'attr': {'class':'text-secondary'}}) }}</div>
                 <div>{{ form_row(form.lipid, {'label': 'Lipides :', 'attr': {'class':'text-secondary'}}) }}</div>
 
-                {{ form_widget(form) }}
+{#                {{ form_widget(form) }}#}
 
                 <input type="submit" class="btn btn-warning" value="Enregistrer">
 
