@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+
+{% block pageTitle %}Page d'administration des types{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center">
+
+            {# Alert messages #}
+            <div class="col-10 col-md-8 col-lg-6 d-flex justify-content-center">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-dismissible alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="col-12">
+                {# Add button #}
+                <div class="text-center my-4">
+                    <a href="{{ path('app_create_ingredient') }}" class="btn btn-info">Ajouter</a>
+                </div>
+
+                {# Table #}
+                <div class="row d-flex justify-content-center">
+                    <div class="col-11 flex-wrap">
+                        <table class="table table-hover border">
+                            <thead>
+                            <tr class="table-danger">
+                                <th scope="col" class="text-center">Image</th>
+                                <th scope="col" class="text-center">Nom</th>
+                                <th scope="col" class="text-center">Aliments</th>
+                                <th scope="col" class="text-center">Action</th>
+                            </tr>
+                            </thead>
+                            {% for type in types %}
+                            <tbody>
+                            <tr class="table">
+                                <td class="text-center"><img src="{{ asset('images/type/' ~ type.image) }}" alt="{{ type.name }}" style="width: 100px;height: 80px"></td>
+                                <td class="text-center">{{ type.name|capitalize }}</td>
+                                {% for food in type.food %}
+                                    <td class="text-center d-flex justify-content-center">{{ food.name|capitalize }}</td>
+                                {% endfor %}
+                                <td>
+                                    <span class="d-flex justify-content-center">
+                                    {# Update food #}
+                                    <a class="btn btn-warning mr-2" href="">Modifier</a>
+
+                                    {# Delete food #}
+                                    <form method="POST" action="" onsubmit="return confirm('Confirmer la suppression du type d\'aliment')" >
+                                        <input type="hidden" name="_method" value="DEL">
+                                        <input type="hidden" name="_token" value="">
+                                        <input type="submit" class="btn btn-danger" value="Supprimer">
+                                    </form>
+                                        </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

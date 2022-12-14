@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification d'un type{% endblock %}
+
+
+{% block pageTitle %}
+    {% if isUpdating %}
+        Modification du type {{ type.name }}
+    {% else %}
+        Ajout d'un type
+    {% endif %}
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center">
+            <div class="col-10 col-md-8 col-lg-6 border p-4 rounded">
+
+                {# form #}
+                {{ form_start(form) }}
+
+                <div>{{ form_errors(form) }}</div>
+                <img class="rounded" src="{{ asset('images/type/' ~ type.image) }}" alt="{{ type.name }}" style="width: 100px;">
+                <div>{{ form_row(form.imageFile, {'label': 'Image :', 'attr': {'class':'text-secondary'}}) }}</div>
+                <div>{{ form_row(form.name, {'label': 'Nom :', 'attr': {'class':'text-secondary'}}) }}</div>
+                <div>{{ form_row(form.type.food, {'label': 'Aliments :', 'attr': {'class':'text-secondary'} }) }}</div>
+
+                <input type="submit" class="btn btn-warning" value="Enregistrer">
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
