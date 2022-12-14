@@ -1,12 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modification d'un type{% endblock %}
+{% block title %}
+    {% if isUpdating %}
+        Modification du type {{ type.name }}
+    {% else %}
+        Création d'un type
+    {% endif %}
+{% endblock %}
 
 
 {% block pageTitle %}
-
+    {% if isUpdating %}
         Modification du type {{ type.name }}
-
+    {% else %}
+        Création d'un type
+    {% endif %}
 {% endblock %}
 
 
@@ -21,7 +29,7 @@
 
                 <div>{{ form_errors(form) }}</div>
                 <img class="rounded" src="{{ asset('images/type/' ~ type.image) }}" alt="{{ type.name }}" style="width: 100px;">
-                <div>{{ form_row(form.image, {'label': 'Image :', 'attr': {'class':'text-secondary'}}) }}</div>
+                <div>{{ form_row(form.imageFile, {'label': 'Image :', 'attr': {'class':'text-secondary'}}) }}</div>
                 <div>{{ form_row(form.name, {'label': 'Nom :', 'attr': {'class':'text-secondary'}}) }}</div>
 
                 <input type="submit" class="btn btn-warning" value="Enregistrer">

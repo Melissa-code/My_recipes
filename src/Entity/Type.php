@@ -6,6 +6,8 @@ use App\Repository\TypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: TypeRepository::class)]
 class Type
@@ -16,10 +18,14 @@ class Type
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:3, max:50, minMessage: 'Le nom doit avoir au minimum 3 caractères', maxMessage: 'Le nom doit avoir au maximum 50 caractères')]
+    #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
+
+    private ?File $imageFile = null;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Food::class)]
     private Collection $food;
@@ -57,6 +63,23 @@ class Type
 
         return $this;
     }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile = null): self
+    {
+        $this->imageFile = $imageFile;
+        // if($this->imageFile instanceof UploadedFile) {
+        //     $this->updated_at = new DateTime('now');
+        //  }
+        return $this;
+    }
+
+
+
 
     /**
      * @return Collection<int, Food>
