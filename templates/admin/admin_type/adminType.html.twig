@@ -48,9 +48,9 @@
                                     <a class="btn btn-warning mr-2" href="{{ path('app_update_type', {'id': type.id }) }}">Modifier</a>
 
                                     {# Delete food #}
-                                    <form method="POST" action="" onsubmit="return confirm('Confirmer la suppression du type d\'aliment')" >
+                                    <form method="POST" action="{{ path('app_delete_type', {'id': type.id}) }}" onsubmit="return confirm('Confirmer la suppression du type d\'aliment')" >
                                         <input type="hidden" name="_method" value="DEL">
-                                        <input type="hidden" name="_token" value="">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('REM' ~ type.id) }}">
                                         <input type="submit" class="btn btn-danger" value="Supprimer">
                                     </form>
                                         </span>

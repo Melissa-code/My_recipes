@@ -29,6 +29,14 @@ class AdminTypeController extends AbstractController
         ]);
     }
 
+    /**
+     * Create or Update a type
+     *
+     * @param Type|null $type
+     * @param Request $request
+     * @param ManagerRegistry $managerRegistry
+     * @return Response
+     */
     #[Route('/admin/type/create', name: 'app_create_type', methods: 'GET|POST')]
     #[Route('/admin/type/{id}', name: 'app_update_type', methods: 'GET|POST')]
     public function updateOrCreateType(Type $type = null, Request $request, ManagerRegistry $managerRegistry): Response
@@ -52,4 +60,30 @@ class AdminTypeController extends AbstractController
             "form" => $form->createView()
         ]);
     }
+
+    /**
+     * Delete a type
+     *
+     * @param ManagerRegistry $managerRegistry
+     * @param Type $type
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/admin/type{id}', name: 'app_delete_type', methods: 'DEL')]
+    public function deleteType(ManagerRegistry $managerRegistry, Type $type, Request $request): Response
+    {
+        $image = $this->getParameter('repertoire_images_type') . '/' . $type->getImage();
+
+        if ($this->isCsrfTokenValid('REM' . $type->getId(), $request->get('_token'))) {
+            $managerRegistry->getManager()->remove($type);
+            $managerRegistry->getManager()->flush();
+            if (file_exists($image)) {
+                unlink($image);
+            }
+            $this->addFlash('success', 'La suppression du type ' . $type->getName() . ' a bien été effectuée.');
+            return $this->redirectToRoute('app_admin_type');
+        }
+    }
+
+
 }
