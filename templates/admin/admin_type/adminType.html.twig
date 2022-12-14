@@ -23,7 +23,7 @@
             <div class="col-12">
                 {# Add button #}
                 <div class="text-center my-4">
-                    <a href="{{ path('app_create_ingredient') }}" class="btn btn-info">Ajouter</a>
+                    <a href="{{ path('app_create_type') }}" class="btn btn-info">Ajouter</a>
                 </div>
 
                 {# Table #}
@@ -34,7 +34,6 @@
                             <tr class="table-danger">
                                 <th scope="col" class="text-center">Image</th>
                                 <th scope="col" class="text-center">Nom</th>
-                                <th scope="col" class="text-center">Aliments</th>
                                 <th scope="col" class="text-center">Action</th>
                             </tr>
                             </thead>
@@ -43,9 +42,6 @@
                             <tr class="table">
                                 <td class="text-center"><img src="{{ asset('images/type/' ~ type.image) }}" alt="{{ type.name }}" style="width: 100px;height: 80px"></td>
                                 <td class="text-center">{{ type.name|capitalize }}</td>
-                                {% for food in type.food %}
-                                    <td class="text-center d-flex justify-content-center">{{ food.name|capitalize }}</td>
-                                {% endfor %}
                                 <td>
                                     <span class="d-flex justify-content-center">
                                     {# Update food #}

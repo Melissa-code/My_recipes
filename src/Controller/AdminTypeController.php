@@ -29,16 +29,21 @@ class AdminTypeController extends AbstractController
         ]);
     }
 
-
+    #[Route('/admin/type/create', name: 'app_create_type', methods: 'GET|POST')]
     #[Route('/admin/type/{id}', name: 'app_update_type', methods: 'GET|POST')]
-    public function updateOrCreateType(Type $type, Request $request, ManagerRegistry $managerRegistry): Response
+    public function updateOrCreateType(Type $type = null, Request $request, ManagerRegistry $managerRegistry): Response
     {
-        $form = $this->createForm(TypeType::class, $type);
+        if(!$type) {
+            $type = new Type();
+        };
 
+        $form = $this->createForm(TypeType::class, $type);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
+            $isUpdating = $type->getId() !== null;
             $managerRegistry->getManager()->persist($type);
             $managerRegistry->getManager()->flush();
+            $this->addFlash('success', ($isUpdating) ?'La modification du type '.$type->getName().' a bien été effectuée.' : 'L\'ajout du type '.$type->getName().' a bien été effectué.' );
             return $this->redirectToRoute('app_admin_type');
         }
 
