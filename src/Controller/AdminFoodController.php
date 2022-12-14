@@ -15,7 +15,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class AdminFoodController extends AbstractController
 {
     /**
-     * Get food function
+     * Get food
      *
      * @param FoodRepository $foodRepository
      * @return Response
@@ -32,7 +32,7 @@ class AdminFoodController extends AbstractController
     }
 
     /**
-     * Create or update food function
+     * Create or update food
      *
      * @param $slugger
      * @param Food|null $food
@@ -65,7 +65,6 @@ class AdminFoodController extends AbstractController
                 );
                 $food->setImage($image);
             }
-            //$food = $form->getData();
 
             $isUpdating = $food->getId() !== null;
             $managerRegistry->getManager()->persist($food);
@@ -83,7 +82,7 @@ class AdminFoodController extends AbstractController
 
 
     /**
-     * Delete food function
+     * Delete food
      *
      * @param Food $food
      * @param Request $request

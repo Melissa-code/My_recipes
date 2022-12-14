@@ -58,6 +58,9 @@ class Food
     #[Assert\NotNull]
     private ?float $lipid = null;
 
+    #[ORM\ManyToOne(inversedBy: 'food')]
+    private ?Type $type = null;
+
 //    #[ORM\Column(nullable: true)]
 //    private DateTimeImmutable $updated_at;
 
@@ -180,4 +183,16 @@ class Food
 //
 //        return $this;
 //    }
+
+public function getType(): ?Type
+{
+    return $this->type;
+}
+
+public function setType(?Type $type): self
+{
+    $this->type = $type;
+
+    return $this;
+}
 }

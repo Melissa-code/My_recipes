@@ -24,6 +24,7 @@
             <img class="rounded" src="{{ asset('images/food/' ~ food.image) }}" alt="{{ food.name }}" style="width: 100px;">
             <div>{{ form_row(form.imageFile, {'label': 'Image :', 'attr': {'class':'text-secondary'}}) }}</div>
             <div>{{ form_row(form.name, {'label': 'Nom :', 'attr': {'class':'text-secondary'}}) }}</div>
+            <div>{{ form_row(form.type, {'label': 'Type :', 'attr': {'class':'text-secondary'} }) }}</div>
             <div>{{ form_row(form.price, {'label': 'Prix :', 'attr': {'class':'text-secondary'}}) }}</div>
             <div>{{ form_row(form.calorie, {'label': 'Calories :', 'attr': {'class':'text-secondary'}}) }}</div>
             <div>{{ form_row(form.protein, {'label': 'Protéines :', 'attr': {'class':'text-secondary'}}) }}</div>

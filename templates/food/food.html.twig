@@ -40,7 +40,10 @@
                         <h2 class="card-title text-center">{{ oneFood.name|capitalize }}</h2>
                     </div>
                     <ul class="list-group list-group-flush text-dark">
-                        <li class="list-group-item text-center"><h3>Prix au kilo: {{ oneFood.price }} €</h3></li>
+                        <li class="list-group-item text-center">
+                            <h3>Prix au kilo: {{ oneFood.price }} €</h3>
+                            <h4>Type: {{ oneFood.type.name }}</h4>
+                        </li>
                         <li class="list-group-item">Calories: {{ oneFood.calorie }}</li>
                         <li class="list-group-item">Protéines: {{ oneFood.protein }}</li>
                         <li class="list-group-item">Glucides: {{ oneFood.carbohydrate }}</li>

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les types{% endblock %}
+
+
+{% block pageTitle %}Les types d'aliments{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center">
+
+            {# Food card #}
+            <div class="col-12 d-flex justify-content-center flex-wrap">
+                {% for type in types %}
+                    <div class="card text-white bg-danger m-2" style="max-width: 18rem;">
+                        <img src="{{ asset('images/type/' ~ type.image) }}" class="rounded-top" alt="photo du type d\'aliment" >
+                        <div class="card-body">
+                            <h2 class="card-title text-center">{{ type.name|capitalize }}</h2>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
