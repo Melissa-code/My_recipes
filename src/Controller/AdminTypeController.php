@@ -59,7 +59,7 @@ class AdminTypeController extends AbstractController
                 $imageFileOriginal = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // Reformat the image file name to be conform to an URL (without special chars) with Slugger interface
                 $imageFileReformat = $slugger->slug($imageFileOriginal);
-                // Create an unique name & unique id for the image file
+                // Create a unique name & unique id for the image file
                 $imageName = $imageFileReformat.'-'.uniqid().'-'.$imageFile->getExtension();
 
                 // Move the image file to a specific directory in the server
