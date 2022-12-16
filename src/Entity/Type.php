@@ -19,7 +19,6 @@ class Type
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min:3, max:50, minMessage: 'Le nom doit avoir au minimum 3 caractères', maxMessage: 'Le nom doit avoir au maximum 50 caractères')]
-    #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]

@@ -22,7 +22,6 @@ class Food
 
     #[ORM\Column(length: 50)]
     #[Assert\Length(min:3, max:50, minMessage: 'Le nom doit avoir au minimum 3 caractères', maxMessage: 'Le nom doit avoir au maximum 50 caractères')]
-    #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\Column]
@@ -40,22 +39,18 @@ class Food
 
     #[ORM\Column]
     #[Assert\Range(notInRangeMessage: 'Les calories doivent être comprises entre {{ min }} et {{ max }}', min: 0.1, max: 180,)]
-    #[Assert\NotNull]
     private ?int $calorie = null;
 
     #[ORM\Column]
     #[Assert\Range(notInRangeMessage:'Les protéines doivent être comprises entre {{ min }} et {{ max }}', min: 0.1, max: 180,)]
-    #[Assert\NotNull]
     private ?float $protein = null;
 
     #[ORM\Column]
     #[Assert\Range(notInRangeMessage: 'Les glucides doivent être compris entre {{ min }} et {{ max }}', min: 0.1, max: 180,)]
-    #[Assert\NotNull]
     private ?float $carbohydrate = null;
 
     #[ORM\Column]
     #[Assert\Range(notInRangeMessage: 'Les lipides doivent être compris entre {{ min }} et {{ max }}', min: 0.1, max: 180,)]
-    #[Assert\NotNull]
     private ?float $lipid = null;
 
     #[ORM\ManyToOne(inversedBy: 'food')]
