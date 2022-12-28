@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminSafeController extends AbstractController
@@ -44,13 +45,21 @@ class AdminSafeController extends AbstractController
     /**
      * Login
      *
-     * @param Request $request
+     * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
     #[Route('/login', name: 'app_login')]
-    public function login(Request $request): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
         return $this->render('admin_safe/login.html.twig', [
+            "error" => $error,
+            "lastUsername" => $lastUsername
         ]);
     }
 
@@ -61,7 +70,6 @@ class AdminSafeController extends AbstractController
     #[Route('/logout', name: 'app_logout')]
     public function logout(): Response
     {
-
     }
 
 }
