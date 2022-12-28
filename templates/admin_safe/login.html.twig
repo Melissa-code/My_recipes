@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Connexion {% endblock %}
+
+
+{% block pageTitle %} Se connecter {% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row h-75  d-flex justify-content-center">
+
+            {# card #}
+            <div class="col-12 d-flex justify-content-center ">
+
+                <div class="card text-white bg-danger m-2" style="max-width: 30rem;">
+                    <div class="card-body">
+
+                        <form action="{{ path('app_login') }}" method="POST">
+                            <div class="form-group">
+                                <label for="">Nom d'utilisateur: </label>
+                                <input type="text" required name="_username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Mot de passe: </label>
+                                <input type="password" required name="_password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Connexion" class="btn btn-warning d-block mx-auto mt-4">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
